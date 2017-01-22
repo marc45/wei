@@ -3,8 +3,9 @@ package com.wei.order.controller;
 import com.wei.common.domain.CommonResponse;
 import com.wei.order.domain.OrderInfo;
 import com.wei.order.service.OrderInfoService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -13,14 +14,36 @@ import java.util.List;
 @RequestMapping("/order/info")
 public class OrderInfoController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(OrderInfoController.class);
     @Resource
     private OrderInfoService orderInfoService;
 
-    @RequestMapping("/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     private CommonResponse list() {
+        LOG.info("LOG00000:订单列表查询开始：");
         CommonResponse commonResponse = new CommonResponse();
         List<OrderInfo> orderInfoList = orderInfoService.list();
         commonResponse.setContent(orderInfoList);
+        LOG.info("LOG00009:订单列表查询结束：{}", commonResponse);
+        return commonResponse;
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    private CommonResponse add(@RequestBody OrderInfo orderInfo) {
+        LOG.info("LOG00050:添加订单开始：{}", orderInfo);
+        CommonResponse commonResponse = new CommonResponse();
+        orderInfo = orderInfoService.add(orderInfo);
+        commonResponse.setContent(orderInfo);
+        LOG.info("LOG00059:添加订单结束：{}", commonResponse);
+        return commonResponse;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    private CommonResponse delete(@PathVariable(value = "id") String id) {
+        LOG.info("LOG00050:添加订单开始：{}", id);
+        CommonResponse commonResponse = new CommonResponse();
+        orderInfoService.delete(id);
+        LOG.info("LOG00059:添加订单结束：{}", commonResponse);
         return commonResponse;
     }
 }

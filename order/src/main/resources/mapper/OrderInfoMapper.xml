@@ -4,7 +4,9 @@
   <resultMap id="BaseResultMap" type="com.wei.order.domain.OrderInfo" >
     <id column="id" property="id" jdbcType="CHAR" />
     <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="order_desc" property="orderDesc" jdbcType="VARCHAR" />
+    <result column="pay_channel" property="payChannel" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_no, `status`
+    id, order_no, order_desc, pay_channel, `status`
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wei.order.domain.OrderInfoExample" >
     select
@@ -101,10 +103,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.wei.order.domain.OrderInfo" >
-    insert into order_info (id, order_no, `status`
-      )
-    values (#{id,jdbcType=CHAR}, #{orderNo,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
-      )
+    insert into order_info (id, order_no, order_desc, 
+      pay_channel, `status`)
+    values (#{id,jdbcType=CHAR}, #{orderNo,jdbcType=VARCHAR}, #{orderDesc,jdbcType=VARCHAR}, 
+      #{payChannel,jdbcType=VARCHAR}, #{status,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wei.order.domain.OrderInfo" >
     insert into order_info
@@ -114,6 +116,12 @@
       </if>
       <if test="orderNo != null" >
         order_no,
+      </if>
+      <if test="orderDesc != null" >
+        order_desc,
+      </if>
+      <if test="payChannel != null" >
+        pay_channel,
       </if>
       <if test="status != null" >
         `status`,
@@ -126,8 +134,14 @@
       <if test="orderNo != null" >
         #{orderNo,jdbcType=VARCHAR},
       </if>
+      <if test="orderDesc != null" >
+        #{orderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null" >
+        #{payChannel,jdbcType=VARCHAR},
+      </if>
       <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -146,8 +160,14 @@
       <if test="record.orderNo != null" >
         order_no = #{record.orderNo,jdbcType=VARCHAR},
       </if>
+      <if test="record.orderDesc != null" >
+        order_desc = #{record.orderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payChannel != null" >
+        pay_channel = #{record.payChannel,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null" >
-        `status` = #{record.status,jdbcType=VARCHAR},
+        `status` = #{record.status,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -158,7 +178,9 @@
     update order_info
     set id = #{record.id,jdbcType=CHAR},
       order_no = #{record.orderNo,jdbcType=VARCHAR},
-      `status` = #{record.status,jdbcType=VARCHAR}
+      order_desc = #{record.orderDesc,jdbcType=VARCHAR},
+      pay_channel = #{record.payChannel,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=CHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,8 +191,14 @@
       <if test="orderNo != null" >
         order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
+      <if test="orderDesc != null" >
+        order_desc = #{orderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null" >
+        pay_channel = #{payChannel,jdbcType=VARCHAR},
+      </if>
       <if test="status != null" >
-        `status` = #{status,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=CHAR},
       </if>
     </set>
     where id = #{id,jdbcType=CHAR}
@@ -178,7 +206,9 @@
   <update id="updateByPrimaryKey" parameterType="com.wei.order.domain.OrderInfo" >
     update order_info
     set order_no = #{orderNo,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=VARCHAR}
+      order_desc = #{orderDesc,jdbcType=VARCHAR},
+      pay_channel = #{payChannel,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

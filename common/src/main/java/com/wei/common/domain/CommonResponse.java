@@ -11,6 +11,11 @@ public class CommonResponse<T> {
     private boolean success = true;
 
     /**
+     * 返回码
+     */
+    private String code;
+
+    /**
      * 返回信息
      */
     private String message;
@@ -25,14 +30,24 @@ public class CommonResponse<T> {
      */
     private T content;
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
-        return "CommonResponse{" +
-                "success=" + success +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                ", content=" + content +
-                '}';
+        final StringBuffer sb = new StringBuffer("CommonResponse{");
+        sb.append("success=").append(success);
+        sb.append(", code='").append(code).append('\'');
+        sb.append(", message='").append(message).append('\'');
+        sb.append(", data=").append(data);
+        sb.append(", content=").append(content);
+        sb.append('}');
+        return sb.toString();
     }
 
     public boolean isSuccess() {

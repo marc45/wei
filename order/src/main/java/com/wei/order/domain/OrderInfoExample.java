@@ -264,6 +264,146 @@ public class OrderInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andOrderDescIsNull() {
+            addCriterion("order_desc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescIsNotNull() {
+            addCriterion("order_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescEqualTo(String value) {
+            addCriterion("order_desc =", value, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescNotEqualTo(String value) {
+            addCriterion("order_desc <>", value, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescGreaterThan(String value) {
+            addCriterion("order_desc >", value, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescGreaterThanOrEqualTo(String value) {
+            addCriterion("order_desc >=", value, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescLessThan(String value) {
+            addCriterion("order_desc <", value, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescLessThanOrEqualTo(String value) {
+            addCriterion("order_desc <=", value, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescLike(String value) {
+            addCriterion("order_desc like", value, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescNotLike(String value) {
+            addCriterion("order_desc not like", value, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescIn(List<String> values) {
+            addCriterion("order_desc in", values, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescNotIn(List<String> values) {
+            addCriterion("order_desc not in", values, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescBetween(String value1, String value2) {
+            addCriterion("order_desc between", value1, value2, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescNotBetween(String value1, String value2) {
+            addCriterion("order_desc not between", value1, value2, "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelIsNull() {
+            addCriterion("pay_channel is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelIsNotNull() {
+            addCriterion("pay_channel is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelEqualTo(String value) {
+            addCriterion("pay_channel =", value, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelNotEqualTo(String value) {
+            addCriterion("pay_channel <>", value, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelGreaterThan(String value) {
+            addCriterion("pay_channel >", value, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelGreaterThanOrEqualTo(String value) {
+            addCriterion("pay_channel >=", value, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelLessThan(String value) {
+            addCriterion("pay_channel <", value, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelLessThanOrEqualTo(String value) {
+            addCriterion("pay_channel <=", value, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelLike(String value) {
+            addCriterion("pay_channel like", value, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelNotLike(String value) {
+            addCriterion("pay_channel not like", value, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelIn(List<String> values) {
+            addCriterion("pay_channel in", values, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelNotIn(List<String> values) {
+            addCriterion("pay_channel not in", values, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelBetween(String value1, String value2) {
+            addCriterion("pay_channel between", value1, value2, "payChannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelNotBetween(String value1, String value2) {
+            addCriterion("pay_channel not between", value1, value2, "payChannel");
+            return (Criteria) this;
+        }
+
         public Criteria andStatusIsNull() {
             addCriterion("`status` is null");
             return (Criteria) this;
@@ -341,6 +481,16 @@ public class OrderInfoExample {
 
         public Criteria andOrderNoLikeInsensitive(String value) {
             addCriterion("upper(order_no) like", value.toUpperCase(), "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderDescLikeInsensitive(String value) {
+            addCriterion("upper(order_desc) like", value.toUpperCase(), "orderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayChannelLikeInsensitive(String value) {
+            addCriterion("upper(pay_channel) like", value.toUpperCase(), "payChannel");
             return (Criteria) this;
         }
 
