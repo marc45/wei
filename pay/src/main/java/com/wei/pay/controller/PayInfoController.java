@@ -1,0 +1,49 @@
+package com.wei.pay.controller;
+
+import com.wei.common.domain.CommonResponse;
+import com.wei.pay.domain.PayInfo;
+import com.wei.pay.service.PayInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@RestController
+@RequestMapping("/pay/info")
+public class PayInfoController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(PayInfoController.class);
+    @Resource
+    private PayInfoService payInfoService;
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    private CommonResponse list() {
+        LOG.info("LOG00110:支付订单列表查询开始：");
+        CommonResponse commonResponse = new CommonResponse();
+        List<PayInfo> payInfoList = payInfoService.list();
+        commonResponse.setContent(payInfoList);
+        LOG.info("LOG00119:支付订单列表查询结束：{}", commonResponse);
+        return commonResponse;
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    private CommonResponse add(@RequestBody PayInfo payInfo) {
+        LOG.info("LOG00120:添加支付订单开始：{}", payInfo);
+        CommonResponse commonResponse = new CommonResponse();
+        payInfo = payInfoService.add(payInfo);
+        commonResponse.setContent(payInfo);
+        LOG.info("LOG00129:添加支付订单结束：{}", commonResponse);
+        return commonResponse;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    private CommonResponse delete(@PathVariable(value = "id") String id) {
+        LOG.info("LOG00130:删除支付订单开始：{}", id);
+        CommonResponse commonResponse = new CommonResponse();
+        payInfoService.delete(id);
+        LOG.info("LOG00139:删除支付订单结束：{}", commonResponse);
+        return commonResponse;
+    }
+}

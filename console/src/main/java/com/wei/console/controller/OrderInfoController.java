@@ -14,10 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/order")
-public class OrderController {
+@RequestMapping("/order/info")
+public class OrderInfoController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrderInfoController.class);
     @Resource
     private RestTemplate restTemplate;
 
@@ -25,7 +25,7 @@ public class OrderController {
     private String orderUrl;
 
     @RequestMapping("/list")
-    public CommonResponse list() throws ClassNotFoundException {
+    public CommonResponse list() {
         LOG.info("LOG00060:查询订单开始");
         CommonResponse commonResponse = restTemplate.getForObject(orderUrl + "/order/info/list", CommonResponse.class);
         LOG.info("LOG00069:查询订单结束:" + commonResponse);
@@ -33,7 +33,7 @@ public class OrderController {
     }
 
     @RequestMapping("/add")
-    public CommonResponse save(@RequestBody OrderInfo orderInfo) {
+    public CommonResponse add(@RequestBody OrderInfo orderInfo) {
         LOG.info("LOG00080:创建订单开始:{}", orderInfo);
         CommonResponse commonResponse = restTemplate.postForObject(orderUrl + "/order/info/add", orderInfo, CommonResponse.class);
         LOG.info("LOG00089:创建订单结束:" + commonResponse);
@@ -46,6 +46,14 @@ public class OrderController {
         CommonResponse commonResponse = new CommonResponse();
         restTemplate.delete(orderUrl + "/order/info/delete/" + id);
         LOG.info("LOG00099:删除订单结束:");
+        return commonResponse;
+    }
+
+    @RequestMapping("/addAndPay")
+    public CommonResponse addAndPay(@RequestBody OrderInfo orderInfo) {
+        LOG.info("LOG00180:下单并支付开始:{}", orderInfo);
+        CommonResponse commonResponse = restTemplate.postForObject(orderUrl + "/order/info/addAndPay", orderInfo, CommonResponse.class);
+        LOG.info("LOG00189:下单并支付结束:" + commonResponse);
         return commonResponse;
     }
 }

@@ -27,6 +27,14 @@ public class OrderInfoService {
         return orderInfo;
     }
 
+    public OrderInfo addAndPay(OrderInfo orderInfo) {
+        orderInfo.setOrderNo(NoUtil.generate("O"));
+        orderInfo.setId(UUIDUtil.generate());
+        orderInfo.setStatus("I");
+        orderInfoMapper.insert(orderInfo);
+        return orderInfo;
+    }
+
     public int delete(String id) {
         return orderInfoMapper.deleteByPrimaryKey(id);
     }

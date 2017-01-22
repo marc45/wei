@@ -1,22 +1,22 @@
-app.register.controller('OrderListController', function($scope, $http, $rootScope) {
+app.register.controller('PayInfoListController', function($scope, $http, $rootScope) {
     $(".nav-sidebar li").removeClass("active");
-    $("#sidebar-order-list").addClass("active");
+    $("#sidebar-pay-info-list").addClass("active");
 
-    $scope.order = {};
+    $scope.pay = {};
 
     $scope.list = function () {
-        $http.post("order/list").success(function(response){
-            $scope.orders = response.content;
+        $http.post("pay/info/list").success(function(response){
+            $scope.pays = response.content;
         }).error(function(){
             alert("系统错误");
         });
     };
 
     $scope.add = function () {
-        $http.post("order/add", $scope.order).success(function(response){
+        $http.post("pay/info/add", $scope.pay).success(function(response){
             if (response.success) {
-                $scope.orders.push(response.content);
-                $("#order-modal").modal("hide");
+                $scope.pays.push(response.content);
+                $("#pay-modal").modal("hide");
             } else {
                 alert(response.message);
             }
@@ -28,12 +28,12 @@ app.register.controller('OrderListController', function($scope, $http, $rootScop
 
     /**
      *
-     * @param order
+     * @param pay
      */
-    $scope.delete = function (order) {
-        $http.post("order/delete/" + order.id).success(function(response){
+    $scope.delete = function (pay) {
+        $http.post("pay/info/delete/" + pay.id).success(function(response){
             if (response.success) {
-                $scope.orders.removeObj(order);
+                $scope.pays.removeObj(pay);
             } else {
                 alert(response.message);
             }

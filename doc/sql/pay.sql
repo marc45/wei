@@ -13,7 +13,7 @@ INSERT INTO pay_channel VALUES ('0000000002', '0000000002', '微信');
 DROP TABLE IF EXISTS `pay_info`;
 CREATE TABLE `pay_info` (
   `id` char(32) NOT NULL DEFAULT '' COMMENT 'ID',
-  `pay_no` varchar(50) COMMENT '支付订单编号',
+  `pay_order_no` varchar(50) COMMENT '支付订单编号',
   `order_no` varchar(50) COMMENT '业务订单编号',
   `pay_channel` varchar(50) COMMENT '支付渠道编号',
   `status` VARCHAR(50) COMMENT '订单状态：I：初始，P：处理中，S：成功，F：失败',
