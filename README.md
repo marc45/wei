@@ -2,7 +2,8 @@
 启动服务后访问：
 http://127.0.0.1:28000/boot/
 
-#基本业务功能
+
+#基本业务功能(base分支)
 ##界面
 ###欢迎界面
 ![image](https://github.com/zhchm101/wei/blob/base/screenshots/welcome.png)
