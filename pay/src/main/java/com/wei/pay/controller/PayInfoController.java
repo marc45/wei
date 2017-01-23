@@ -45,4 +45,14 @@ public class PayInfoController {
         LOG.info("LOG00139:删除支付订单结束：{}", commonResponse);
         return commonResponse;
     }
+
+    @RequestMapping("/find")
+    public CommonResponse find(@RequestBody PayInfo payInfo) {
+        LOG.info("LOG00270:查询订单开始:{}", payInfo);
+        List<PayInfo> orderInfoList = payInfoService.find(payInfo);
+        CommonResponse commonResponse = new CommonResponse();
+        commonResponse.setContent(orderInfoList);
+        LOG.info("LOG00279:查询订单结束:" + commonResponse);
+        return commonResponse;
+    }
 }

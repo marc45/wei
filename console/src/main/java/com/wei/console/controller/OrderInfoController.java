@@ -26,9 +26,9 @@ public class OrderInfoController {
 
     @RequestMapping("/list")
     public CommonResponse list() {
-        LOG.info("LOG00060:查询订单开始");
+        LOG.info("LOG00060:订单列表开始");
         CommonResponse commonResponse = restTemplate.getForObject(orderUrl + "/order/info/list", CommonResponse.class);
-        LOG.info("LOG00069:查询订单结束:" + commonResponse);
+        LOG.info("LOG00069:单列表结束:" + commonResponse);
         return commonResponse;
     }
 
@@ -54,6 +54,14 @@ public class OrderInfoController {
         LOG.info("LOG00180:下单并支付开始:{}", orderInfo);
         CommonResponse commonResponse = restTemplate.postForObject(orderUrl + "/order/info/addAndPay", orderInfo, CommonResponse.class);
         LOG.info("LOG00189:下单并支付结束:" + commonResponse);
+        return commonResponse;
+    }
+
+    @RequestMapping("/find")
+    public CommonResponse find(@RequestBody OrderInfo orderInfo) {
+        LOG.info("LOG00270:查询订单开始");
+        CommonResponse commonResponse = restTemplate.postForObject(orderUrl + "/order/info/find", orderInfo, CommonResponse.class);
+        LOG.info("LOG00279:查询订单结束:" + commonResponse);
         return commonResponse;
     }
 }

@@ -10,6 +10,7 @@ import com.wei.pay.mapper.PayInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +26,16 @@ public class PayInfoService {
     public List<PayInfo> list() {
         PayInfoExample example = new PayInfoExample();
         example.setOrderByClause("order_no desc");
+        return payInfoMapper.selectByExample(example);
+    }
+
+    public List<PayInfo> find(PayInfo payInfo) {
+        PayInfoExample example = new PayInfoExample();
+        example.setOrderByClause("order_no desc");
+        PayInfoExample.Criteria criteria = example.createCriteria();
+        if (!StringUtils.isEmpty(payInfo.getOrderNo())) {
+            criteria.andOrderNoEqualTo(payInfo.getOrderNo());
+        }
         return payInfoMapper.selectByExample(example);
     }
 

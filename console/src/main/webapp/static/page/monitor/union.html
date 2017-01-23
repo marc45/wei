@@ -1,11 +1,25 @@
-<div ng-controller="OrderInfoListController">
-    <h1 class="page-header">订单一览</h1>
+<div ng-controller="MonitorUnionController">
+    <h1 class="page-header">联合查询</h1>
 
-    <p>
-        <button class="btn btn-primary" ng-click="list()">刷新列表</button>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#order-modal">添加订单</button>
-    </p>
+    <form class="form-horizontal">
 
+        <div class="form-group">
+            <label class="col-sm-3 control-label">业务订单号</label>
+            <div class="col-sm-9">
+                <input class="form-control" ng-model="orderNo">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label"></label>
+            <div class="col-sm-9">
+                <button type="button" class="btn btn-primary" ng-click="unionFind()">查询</button>
+            </div>
+        </div>
+
+    </form>
+
+    <h4>业务订单</h4>
     <table class="table table-bordered">
         <tr>
             <th>订单编号</th>
@@ -27,42 +41,25 @@
         </tr>
     </table>
 
-    <!-- 添加渠道 -->
-    <div class="modal fade" id="order-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">订单</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal">
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">订单描述</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" ng-model="order.orderDesc">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">类别</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" ng-model="order.payChannel">
-                                    <option ng-repeat="channel in channels" value="{{channel.payChannel}}">{{channel.payChannelName}}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" ng-click="add()">下单</button>
-                    <button type="button" class="btn btn-primary" ng-click="addAndPay()">下单并支付</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h4>支付订单</h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>业务订单编号</th>
+            <th>支付订单编号</th>
+            <th>支付渠道</th>
+            <th>支付状态</th>
+        </tr>
+        <tr ng-repeat="pay in pays">
+            <td>{{pay.orderNo}}</td>
+            <td>{{pay.payOrderNo}}</td>
+            <td>
+                <span ng-repeat="channel in channels" ng-if="channel.payChannel==pay.payChannel">{{channel.payChannelName}}</span>
+            </td>
+            <td>{{orderStatus[pay.status]}}</td>
+            <td>
+                <button ng-if="pay.type!='LOCAL'" class="btn btn-primary btn-xs" ng-click="delete(pay)">删除</button>
+            </td>
+        </tr>
+    </table>
 
 </div>

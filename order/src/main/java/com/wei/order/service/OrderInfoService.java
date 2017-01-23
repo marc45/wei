@@ -13,6 +13,7 @@ import com.wei.order.mapper.OrderInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -32,6 +33,16 @@ public class OrderInfoService {
     public List<OrderInfo> list() {
         OrderInfoExample example = new OrderInfoExample();
         example.setOrderByClause("order_no desc");
+        return orderInfoMapper.selectByExample(example);
+    }
+
+    public List<OrderInfo> find(OrderInfo orderInfo) {
+        OrderInfoExample example = new OrderInfoExample();
+        example.setOrderByClause("order_no desc");
+        OrderInfoExample.Criteria criteria = example.createCriteria();
+        if (!StringUtils.isEmpty(orderInfo.getOrderNo())) {
+            criteria.andOrderNoEqualTo(orderInfo.getOrderNo());
+        }
         return orderInfoMapper.selectByExample(example);
     }
 

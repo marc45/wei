@@ -55,4 +55,14 @@ public class OrderInfoController {
         LOG.info("LOG00199:下单并支付结束：{}", commonResponse);
         return commonResponse;
     }
+
+    @RequestMapping("/find")
+    public CommonResponse find(@RequestBody OrderInfo orderInfo) {
+        LOG.info("LOG00270:查询订单开始:{}", orderInfo);
+        List<OrderInfo> orderInfoList = orderInfoService.find(orderInfo);
+        CommonResponse commonResponse = new CommonResponse();
+        commonResponse.setContent(orderInfoList);
+        LOG.info("LOG00279:查询订单结束:" + commonResponse);
+        return commonResponse;
+    }
 }

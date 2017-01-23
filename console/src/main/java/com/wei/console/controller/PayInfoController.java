@@ -1,6 +1,7 @@
 package com.wei.console.controller;
 
 import com.wei.common.domain.CommonResponse;
+import com.wei.common.domain.OrderInfo;
 import com.wei.common.domain.PayInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,14 @@ public class PayInfoController {
         CommonResponse commonResponse = new CommonResponse();
         restTemplate.delete(payUrl + "/pay/info/delete/" + id);
         LOG.info("LOG00179:删除订单结束:");
+        return commonResponse;
+    }
+
+    @RequestMapping("/find")
+    public CommonResponse find(@RequestBody PayInfo payInfo) {
+        LOG.info("LOG00270:查询订单开始");
+        CommonResponse commonResponse = restTemplate.postForObject(payUrl + "/pay/info/find", payInfo, CommonResponse.class);
+        LOG.info("LOG00279:查询订单结束:" + commonResponse);
         return commonResponse;
     }
 }
