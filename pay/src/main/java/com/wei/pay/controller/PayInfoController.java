@@ -28,13 +28,12 @@ public class PayInfoController {
         return commonResponse;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    private CommonResponse add(@RequestBody PayInfo payInfo) {
-        LOG.info("LOG00120:添加支付订单开始：{}", payInfo);
+    @RequestMapping(value = "/pay", method = RequestMethod.POST)
+    private CommonResponse pay(@RequestBody PayInfo payInfo) {
+        LOG.info("LOG00120:支付开始：{}", payInfo);
         CommonResponse commonResponse = new CommonResponse();
-        payInfo = payInfoService.add(payInfo);
-        commonResponse.setContent(payInfo);
-        LOG.info("LOG00129:添加支付订单结束：{}", commonResponse);
+        payInfoService.pay(payInfo, commonResponse);
+        LOG.info("LOG00129:支付结束：{}", commonResponse);
         return commonResponse;
     }
 

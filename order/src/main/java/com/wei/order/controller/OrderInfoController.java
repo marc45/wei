@@ -50,8 +50,7 @@ public class OrderInfoController {
     @RequestMapping(value = "/addAndPay", method = RequestMethod.POST)
     private CommonResponse addAndPay(@RequestBody OrderInfo orderInfo) {
         LOG.info("LOG00190:下单并支付开始：{}", orderInfo);
-        CommonResponse commonResponse = new CommonResponse();
-        orderInfo = orderInfoService.addAndPay(orderInfo);
+        CommonResponse commonResponse = orderInfoService.addAndPay(orderInfo);
         commonResponse.setContent(orderInfo);
         LOG.info("LOG00199:下单并支付结束：{}", commonResponse);
         return commonResponse;

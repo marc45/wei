@@ -26,9 +26,9 @@ public class PayChannelController {
 
     @RequestMapping("/list")
     public CommonResponse list() {
-        LOG.info("LOG00140:查询支付订单开始");
+        LOG.info("LOG00140:查询支付渠道开始");
         CommonResponse commonResponse = restTemplate.getForObject(payUrl + "/pay/channel/list", CommonResponse.class);
-        LOG.info("LOG00149:查询支付订单结束:" + commonResponse);
+        LOG.info("LOG00149:查询支付渠道结束:" + commonResponse);
         return commonResponse;
     }
 

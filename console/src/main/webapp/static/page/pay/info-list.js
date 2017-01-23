@@ -42,7 +42,16 @@ app.register.controller('PayInfoListController', function($scope, $http, $rootSc
         });
     };
 
+    $scope.listPayChannel = function () {
+        $http.post("pay/channel/list").success(function(response){
+            $scope.channels = response.content;
+        }).error(function(){
+            alert("系统错误");
+        });
+    };
+
     $scope.orderStatus = $rootScope.loadEnum("orderStatus");
     $scope.list();
+    $scope.listPayChannel();
 
 });
